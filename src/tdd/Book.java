@@ -38,7 +38,7 @@ public class Book implements IProduct {
     }
 
     @Override
-    public boolean isExempt() {
+    public boolean isTaxExempt() {
         return this.taxExempt;
     }
 

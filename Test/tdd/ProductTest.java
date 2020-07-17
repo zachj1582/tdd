@@ -1,25 +1,37 @@
 package tdd;
 
 import org.junit.jupiter.api.Test;
-
-import java.math.BigDecimal;
 import static org.junit.jupiter.api.Assertions.*;
+import java.math.BigDecimal;
 
 public class ProductTest {
+    Book book = new Book("Harry Potter", BigDecimal.valueOf(14.49), false, true);
 
-    public void getPriceHelper(IProduct product, BigDecimal price){
-        assertEquals(price, product.getPrice());
+    @Test
+    public void testGetName(){
+        String actual = book.getName();
+        String expected = "Harry Potter";
+        assertEquals(expected, actual);
     }
 
-    public void getNameHelper(IProduct product, String name){
-        assertEquals(name, product.getName());
+    @Test
+    public void testGetPrice(){
+        BigDecimal expected = BigDecimal.valueOf(14.49);
+        BigDecimal actual = book.getPrice();
+        assertEquals(expected, actual);
     }
 
-    public void getExemptHelper(IProduct product, boolean exempt){
-        assertEquals(exempt, product.isExempt());
+    @Test
+    public void testGetTaxExempt(){
+        boolean expected = true;
+        boolean actual = book.isTaxExempt();
+        assertEquals(expected, actual);
     }
 
-    public void getImportedHelper(IProduct product, boolean imported){
-        assertEquals(imported, product.isImported());
+    @Test
+    public void testGetImported(){
+        boolean expected = false;
+        boolean actual = book.isImported();
+        assertEquals(expected, actual);
     }
 }

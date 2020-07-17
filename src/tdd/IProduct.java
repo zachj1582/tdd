@@ -10,7 +10,7 @@ public interface IProduct {
     public BigDecimal getPrice();
     public void setPrice(BigDecimal price);
 
-    public boolean isExempt();
+    public boolean isTaxExempt();
 
     public boolean isImported();
 }
