@@ -12,7 +12,7 @@ public class CashRegister {
     }
 
 
-    public static CashRegister getCashRegister() {
+    public static CashRegister getCashRegisterInstance() {
         return cashRegister;
     }
 
@@ -26,9 +26,16 @@ public class CashRegister {
             if (product.getName().equals(productName)) {
                 return product.getName();
             }
-
         }
         return "Item not found";
+    }
+
+    public ArrayList<Product> getTransactions(){
+        return this.transaction;
+    }
+
+    public void payment(){
+        
     }
 
 }
