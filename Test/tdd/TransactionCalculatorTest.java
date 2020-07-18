@@ -27,4 +27,14 @@ public class TransactionCalculatorTest {
                 RoundingMode.HALF_EVEN);
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void test_updatePriceInArray(){
+        cashRegister.addProductToTransaction("Harry Potter", BigDecimal.valueOf(14.49), false, true);
+        calculator.addTaxes();
+        BigDecimal expected = BigDecimal.valueOf(14.49).multiply(BigDecimal.valueOf(1.10)).setScale(2,
+                RoundingMode.HALF_EVEN);
+        BigDecimal actual = cashRegister.getTransactions().get(0).getPrice();
+        assertEquals(expected, actual);
+    }
 }

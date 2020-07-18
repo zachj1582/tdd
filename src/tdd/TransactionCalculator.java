@@ -14,6 +14,7 @@ public class TransactionCalculator {
 
     public BigDecimal addTaxes(){
         BigDecimal temp = null;
+        BigDecimal taxTotal = null;
         for(Product product:cashRegister.getTransactions()){
             temp = product.getPrice();
         }
