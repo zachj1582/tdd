@@ -37,4 +37,12 @@ public class TransactionCalculatorTest {
         BigDecimal actual = cashRegister.getTransactions().get(0).getPrice();
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void test_getTotalTaxes(){
+        cashRegister.addProductToTransaction("Harry Potter", BigDecimal.valueOf(14.49), false, true);
+        BigDecimal actual = calculator.addTaxes();
+        BigDecimal expected = BigDecimal.valueOf(1.49);
+        assertEquals(expected, actual);
+    }
 }
