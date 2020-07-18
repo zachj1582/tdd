@@ -1,7 +1,10 @@
 package tdd;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
+
+import static java.math.BigDecimal.*;
 
 public class TransactionCalculator {
 //    private ArrayList<Product> list = CashRegister.getCashRegisterInstance().getTransactions();
@@ -14,6 +17,7 @@ public class TransactionCalculator {
         for(Product product:cashRegister.getTransactions()){
             temp = product.getPrice();
         }
+        temp = temp.multiply(BigDecimal.valueOf(1.10)).setScale(2, RoundingMode.HALF_EVEN);
         return temp;
     }
 }
