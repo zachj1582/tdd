@@ -14,11 +14,10 @@ public class TransactionCalculator {
 
     public BigDecimal addTaxes(){
         BigDecimal temp = null;
-        BigDecimal taxTotal = null;
         for(Product product:cashRegister.getTransactions()){
-            temp = product.getPrice();
+            temp = product.getPrice().multiply(BigDecimal.valueOf(1.10)).setScale(2, RoundingMode.HALF_EVEN);
+            product.setPrice(temp);
         }
-        temp = temp.multiply(BigDecimal.valueOf(1.10)).setScale(2, RoundingMode.HALF_EVEN);
         return temp;
     }
 }
