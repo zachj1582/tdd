@@ -1,22 +1,34 @@
 package tdd;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class CashRegister {
 
-    private ArrayList<IProduct> transaction;
+    private ArrayList<Product> transaction = new ArrayList<>();
     private static CashRegister cashRegister = new CashRegister();
 
-    private CashRegister(){
+    private CashRegister() {
     }
 
 
-    public static CashRegister getCashRegister(){
+    public static CashRegister getCashRegister() {
         return cashRegister;
     }
 
-    public void addToTransaction(){
+    public void addProductToTransaction(String name, BigDecimal price, boolean imported, boolean taxExempt) {
+        Product product = new Product(name, price, imported, taxExempt);
+        transaction.add(product);
+    }
 
+    public String transactionContains(String productName) {
+        for (Product product : transaction) {
+            if (product.getName().equals(productName)) {
+                return product.getName();
+            }
+
+        }
+        return "Item not found";
     }
 
 }

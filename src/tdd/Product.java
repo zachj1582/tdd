@@ -2,14 +2,14 @@ package tdd;
 
 import java.math.BigDecimal;
 
-public class Book implements IProduct {
+public class Product implements IProduct {
 
     private String name;
     private BigDecimal price;
     private boolean imported;
     private boolean taxExempt;
 
-    public Book(String name, BigDecimal price, boolean imported, boolean taxExempt){
+    public Product(String name, BigDecimal price, boolean imported, boolean taxExempt){
         this.name = name;
         this.price = price;
         this.imported = imported;

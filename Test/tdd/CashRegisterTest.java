@@ -1,6 +1,9 @@
 package tdd;
 
 import org.junit.jupiter.api.Test;
+
+import java.math.BigDecimal;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CashRegisterTest {
@@ -17,5 +20,17 @@ public class CashRegisterTest {
         } catch(final RuntimeException re){
             re.printStackTrace();
         }
+    }
+
+    @Test
+    public void test_CanAddToTransaction(){
+        cashRegister.addProductToTransaction("Harry Potter", BigDecimal.valueOf(14.49), false, true);
+        String actual = cashRegister.transactionContains("Harry Potter");
+        String expected = "Harry Potter";
+        assertEquals(expected, actual);
+        cashRegister.addProductToTransaction("Imported Chocolate Bar", BigDecimal.valueOf(5.00), true, true);
+        String actual2 = cashRegister.transactionContains("Imported Chocolate Bar");
+        String expected2 = "Twilight";
+        assertEquals(expected2, actual2);
     }
 }
