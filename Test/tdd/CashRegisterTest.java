@@ -30,7 +30,7 @@ public class CashRegisterTest {
         assertEquals(expected, actual);
         cashRegister.addProductToTransaction("Imported Chocolate Bar", BigDecimal.valueOf(5.00), true, true);
         String actual2 = cashRegister.transactionContains("Imported Chocolate Bar");
-        String expected2 = "Twilight";
+        String expected2 = "Imported Chocolate Bar";
         assertEquals(expected2, actual2);
     }
 }
