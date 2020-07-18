@@ -18,4 +18,12 @@ public class TransactionCalculatorTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void test_addTaxesToPrice(){
+        cashRegister.addProductToTransaction("Harry Potter", BigDecimal.valueOf(14.49), false, true);
+        BigDecimal actual = calculator.addTaxes();
+        BigDecimal expected = BigDecimal.valueOf(14.49 * 1.10);
+        assertEquals(expected, actual);
+    }
+
 }
