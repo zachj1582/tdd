@@ -7,10 +7,11 @@ public class CashRegister {
 
     private ArrayList<Product> transaction = new ArrayList<>();
     private static CashRegister cashRegister = new CashRegister();
+    TransactionCalculator calculator = TransactionCalculator.getCalculatorInstance();
+    Receipt receipt = Receipt.getReceiptInstance();
 
     private CashRegister() {
     }
-
 
     public static CashRegister getCashRegisterInstance() {
         return cashRegister;
@@ -34,8 +35,15 @@ public class CashRegister {
         return this.transaction;
     }
 
-    public void clearTransaction(){
+    private void clearTransaction(){
         this.transaction.clear();
+    }
+
+    public void processTransaction(){
+        BigDecimal totalTaxes = calculator.addTaxes(transaction);
+        BigDecimal transactionTotal = calculator.getTransactionTotal(transaction);
+        receipt.printReceipt(transaction, totalTaxes, transactionTotal);
+        clearTransaction();
     }
 
 }

@@ -9,13 +9,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TransactionCalculatorTest {
     CashRegister cashRegister = CashRegister.getCashRegisterInstance();
-    TransactionCalculator calculator = new TransactionCalculator();
+    TransactionCalculator calculator = TransactionCalculator.getCalculatorInstance();
 
     @Test
     public void test_doesAddTaxesGetsInformation(){
-        cashRegister.clearTransaction();
+        cashRegister.processTransaction();
         cashRegister.addProductToTransaction("Harry Potter", BigDecimal.valueOf(14.49), false, true);
-        calculator.addTaxes();
+        calculator.addTaxes(cashRegister.getTransactions());
         BigDecimal actual = cashRegister.getTransactions().get(0).getPrice();
         BigDecimal expected = BigDecimal.valueOf(14.49);
         assertEquals(expected, actual);
@@ -23,9 +23,9 @@ public class TransactionCalculatorTest {
 
     @Test
     public void test_addTaxesToPrice(){
-        cashRegister.clearTransaction();
+        cashRegister.processTransaction();
         cashRegister.addProductToTransaction("Music CD", BigDecimal.valueOf(14.99), false, false);
-        calculator.addTaxes();
+        calculator.addTaxes(cashRegister.getTransactions());
         BigDecimal actual = cashRegister.getTransactions().get(0).getPrice();
         BigDecimal expected = BigDecimal.valueOf(14.99).multiply(BigDecimal.valueOf(1.10)).setScale(2,
                 RoundingMode.HALF_EVEN);
@@ -34,9 +34,9 @@ public class TransactionCalculatorTest {
 
     @Test
     public void test_updatePriceInArray(){
-        cashRegister.clearTransaction();
+        cashRegister.processTransaction();
         cashRegister.addProductToTransaction("Imported Bottle of Perfume", BigDecimal.valueOf(47.50), true, false);
-        calculator.addTaxes();
+        calculator.addTaxes(cashRegister.getTransactions());
         BigDecimal expected = BigDecimal.valueOf(47.50).multiply(BigDecimal.valueOf(1.15)).setScale(2,
                 RoundingMode.HALF_EVEN);
         BigDecimal actual = cashRegister.getTransactions().get(0).getPrice();
@@ -45,24 +45,24 @@ public class TransactionCalculatorTest {
 
     @Test
     public void test_getTotalTaxes(){
-        cashRegister.clearTransaction();
+        cashRegister.processTransaction();
         cashRegister.addProductToTransaction("Harry Potter", BigDecimal.valueOf(12.49), false, true);
         cashRegister.addProductToTransaction("Imported Box of Chocolates", BigDecimal.valueOf(10.00), true, true);
         cashRegister.addProductToTransaction("Imported Bottle of Perfume", BigDecimal.valueOf(47.50), true, false);
         cashRegister.addProductToTransaction("Music CD", BigDecimal.valueOf(14.99), false, false);
-        BigDecimal actual = calculator.addTaxes();
+        BigDecimal actual = calculator.addTaxes(cashRegister.getTransactions());
         BigDecimal expected = BigDecimal.valueOf(9.12);
         assertEquals(expected, actual);
     }
 
     @Test
     public void test_addTaxesAccountingForImportedAndExempt(){
-        cashRegister.clearTransaction();
+        cashRegister.processTransaction();
         cashRegister.addProductToTransaction("Harry Potter", BigDecimal.valueOf(12.49), false, true);
         cashRegister.addProductToTransaction("Imported Box of Chocolates", BigDecimal.valueOf(10.00), true, true);
         cashRegister.addProductToTransaction("Imported Bottle of Perfume", BigDecimal.valueOf(47.50), true, false);
         cashRegister.addProductToTransaction("Music CD", BigDecimal.valueOf(14.99), false, false);
-        calculator.addTaxes();
+        calculator.addTaxes(cashRegister.getTransactions());
         BigDecimal actual = cashRegister.getTransactions().get(0).getPrice();
         BigDecimal expected = BigDecimal.valueOf(12.49).multiply(BigDecimal.valueOf(1.00)).setScale(2,
                 RoundingMode.HALF_EVEN);
@@ -86,14 +86,14 @@ public class TransactionCalculatorTest {
 
     @Test
     public void test_getTransactionTotalGetsTotal(){
-        cashRegister.clearTransaction();
+        cashRegister.processTransaction();
         cashRegister.addProductToTransaction("Harry Potter", BigDecimal.valueOf(12.49), false, true);
         cashRegister.addProductToTransaction("Imported Box of Chocolates", BigDecimal.valueOf(10.00), true, true);
         cashRegister.addProductToTransaction("Imported Bottle of Perfume", BigDecimal.valueOf(47.50), true, false);
         cashRegister.addProductToTransaction("Music CD", BigDecimal.valueOf(14.99), false, false);
-        calculator.addTaxes();
-        BigDecimal expected = BigDecimal.valueOf(94.10);
-        BigDecimal actual = calculator.getTransactionTotal();
+        calculator.addTaxes(cashRegister.getTransactions());
+        BigDecimal expected = BigDecimal.valueOf(94.10).setScale(2, RoundingMode.HALF_EVEN);
+        BigDecimal actual = calculator.getTransactionTotal(cashRegister.getTransactions());
         assertEquals(expected, actual);
     }
 
