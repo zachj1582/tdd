@@ -43,5 +43,10 @@ public class TransactionCalculator {
         return totalTaxes;
     }
 
+    public BigDecimal getTransactionTotal(){
+        BigDecimal transactionTotal = cashRegister.getTransactions().stream().map(Product::getPrice).reduce(BigDecimal.ZERO,
+                BigDecimal::add);
+        return transactionTotal;
+    }
 
 }
