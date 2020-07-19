@@ -43,7 +43,5 @@ public class TransactionCalculator {
         return totalTaxes;
     }
 
-//    public getTransactionTotal(){
-//
-//    }
+
 }
