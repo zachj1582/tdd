@@ -3,6 +3,7 @@ package tdd;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -32,5 +33,13 @@ public class CashRegisterTest {
         String actual2 = cashRegister.transactionContains("Imported Chocolate Bar");
         String expected2 = "Imported Chocolate Bar";
         assertEquals(expected2, actual2);
+    }
+
+    @Test
+    public void clearTransactionsEmptiesTransactionArray(){
+        cashRegister.addProductToTransaction("Harry Potter", BigDecimal.valueOf(14.49), false, true);
+        int actual = cashRegister.getTransactions().size();
+        int expected = 0;
+        assertEquals(expected, actual);
     }
 }

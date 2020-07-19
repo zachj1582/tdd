@@ -34,8 +34,8 @@ public class CashRegister {
         return this.transaction;
     }
 
-    public void payment(){
-        
+    public void clearTransaction(){
+
     }
 
 }

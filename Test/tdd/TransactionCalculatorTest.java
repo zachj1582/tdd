@@ -11,13 +11,14 @@ public class TransactionCalculatorTest {
     CashRegister cashRegister = CashRegister.getCashRegisterInstance();
     TransactionCalculator calculator = new TransactionCalculator();
 
-//    @Test
-//    public void test_addTaxesGetsInformation(){
-//        cashRegister.addProductToTransaction("Harry Potter", BigDecimal.valueOf(14.49), false, true);
-//        BigDecimal actual = calculator.addTaxes();
-//        BigDecimal expected = BigDecimal.valueOf(14.49);
-//        assertEquals(expected, actual);
-//    }
+    @Test
+    public void test_doesAddTaxesGetsInformation(){
+        cashRegister.addProductToTransaction("Harry Potter", BigDecimal.valueOf(14.49), false, true);
+        calculator.addTaxes();
+        BigDecimal actual = cashRegister.getTransactions().get(0).getPrice();
+        BigDecimal expected = BigDecimal.valueOf();
+        assertEquals(expected, actual);
+    }
 
     @Test
     public void test_addTaxesToPrice(){
@@ -72,6 +73,14 @@ public class TransactionCalculatorTest {
         BigDecimal expected4 = BigDecimal.valueOf(14.99).multiply(BigDecimal.valueOf(1.10)).setScale(2,
                 RoundingMode.HALF_EVEN);
         assertEquals(expected4, actual4);
+    }
+
+
+
+
+    @Test
+    public void test_getTransactionTotalGetsTotal(){
+
     }
 
 
