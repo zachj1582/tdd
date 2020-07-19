@@ -31,7 +31,13 @@ public class TransactionCalculator {
                                 RoundingMode.HALF_EVEN);
                 product.setPrice(temp);
             }
-
+            if(!product.isImported() && !product.isTaxExempt()){
+                temp = product.getPrice().multiply(Constants.TAX_RATE_LOCAL).setScale(2, RoundingMode.HALF_EVEN);
+                totalTaxes =
+                        totalTaxes.add(product.getPrice().multiply(Constants.TAX_RATE_LOCAL.subtract(BigDecimal.valueOf(1)))).setScale(2,
+                                RoundingMode.HALF_EVEN);
+                product.setPrice(temp);
+            }
 
         }
         return totalTaxes;
