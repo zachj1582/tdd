@@ -40,9 +40,12 @@ public class TransactionCalculatorTest {
 
     @Test
     public void test_getTotalTaxes(){
-        cashRegister.addProductToTransaction("Harry Potter", BigDecimal.valueOf(14.49), false, true);
+        cashRegister.addProductToTransaction("Harry Potter", BigDecimal.valueOf(12.49), false, true);
+        cashRegister.addProductToTransaction("Imported Box of Chocolates", BigDecimal.valueOf(10.00), true, true);
+        cashRegister.addProductToTransaction("Imported Bottle of Perfume", BigDecimal.valueOf(47.50), true, false);
+        cashRegister.addProductToTransaction("Music CD", BigDecimal.valueOf(14.99), false, false);
         BigDecimal actual = calculator.addTaxes();
-        BigDecimal expected = BigDecimal.valueOf(1.45);
+        BigDecimal expected = BigDecimal.valueOf(9.12);
         assertEquals(expected, actual);
     }
 
