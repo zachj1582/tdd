@@ -35,7 +35,7 @@ public class CashRegister {
     }
 
     public void clearTransaction(){
-
+        this.transaction.clear();
     }
 
 }
