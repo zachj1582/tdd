@@ -24,7 +24,7 @@ public class Receipt {
 
     }
 
-    public String printItems(ArrayList<Product> transactions) {
+    private String printItems(ArrayList<Product> transactions) {
         String temp = "";
         for(Product product: transactions){
             System.out.println(product.getName() + ":" + "   $" + product.getPrice() + "\n");
